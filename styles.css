@@ -1,0 +1,1427 @@
+/* ==========================================================================
+   StratCoast — AI Charter Strategy Optimizer & Maritime Operations Cockpit
+   Complete UI/UX Design System replicating & elevating the Replit application
+   ========================================================================== */
+
+:root {
+  /* Design Tokens */
+  --background: 210 31% 96%;
+  --foreground: 211 43% 17%;
+  --border: 211 22% 86%;
+  --input: 211 22% 80%;
+  --ring: 187 72% 38%;
+  
+  --card: 0 0% 100%;
+  --card-foreground: 211 43% 17%;
+  --card-border: 211 22% 87%;
+  
+  --popover: 0 0% 100%;
+  --popover-foreground: 211 43% 17%;
+  --popover-border: 211 22% 86%;
+  
+  /* Brand Maritime Colors */
+  --primary: 187 72% 31%;          /* Deep ocean teal #167b88 */
+  --primary-foreground: 0 0% 100%;
+  --primary-hover: #136772;
+  
+  --secondary: 210 28% 91%;
+  --secondary-foreground: 211 43% 17%;
+  
+  --muted: 210 25% 93%;
+  --muted-foreground: 211 17% 46%;
+  
+  --accent: 36 87% 57%;            /* Warm maritime amber #f1a432 */
+  --accent-foreground: 211 43% 17%;
+  
+  --destructive: 2 65% 48%;
+  --destructive-foreground: 0 0% 100%;
+  
+  --emerald: #2a926c;
+  --emerald-bg: #31aa7e1f;
+  
+  /* Typography */
+  --app-font-sans: "Manrope", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --app-font-mono: "DM Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --radius: 0.8rem;
+  
+  /* Dark Navy Analytical Rail */
+  --sidebar: 210 41% 13%;          /* #121b24 */
+  --sidebar-foreground: 210 25% 88%;
+  --sidebar-border: 211 29% 23%;   /* #2a3a4c */
+  --sidebar-accent: 211 34% 21%;   /* #233548 */
+  --sidebar-accent-foreground: 0 0% 100%;
+  --sidebar-ring: 187 72% 46%;
+  
+  --chart-1: 187 72% 31%;
+  --chart-2: 36 87% 57%;
+  --chart-3: 211 65% 43%;
+  --chart-4: 158 41% 42%;
+  --chart-5: 2 65% 48%;
+}
+
+/* Base resets */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#shipment,
+#signals,
+#strategy,
+#simulator,
+#corridor-map,
+#data-section,
+section[id] {
+  scroll-margin-top: 86px;
+}
+
+body {
+  font-family: var(--app-font-sans);
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  line-height: 1.5;
+  font-size: 13px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+/* ==========================================================================
+   Layout Shell: Side Rail + Main Column
+   ========================================================================== */
+
+.cockpit-app {
+  min-height: 100dvh;
+  display: flex;
+}
+
+/* --- Left Analytical Navigation Sidebar Rail --- */
+.side-rail {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 248px;
+  background: hsl(var(--sidebar));
+  color: hsl(var(--sidebar-foreground));
+  border-right: 1px solid hsl(var(--sidebar-border));
+  display: flex;
+  flex-direction: column;
+  padding: 25px 17px 18px;
+  z-index: 40;
+  user-select: none;
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 10px;
+}
+
+.brand-mark {
+  width: 38px;
+  height: 38px;
+  background: hsl(var(--accent));
+  color: hsl(var(--sidebar));
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 7px 18px #f1a4322e;
+  flex-shrink: 0;
+}
+
+.brand-name {
+  color: #f1f6f7;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.brand-sub {
+  color: #94a9b8;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.rail-rule {
+  height: 1px;
+  background: hsl(var(--sidebar-border));
+  margin: 28px 9px 20px;
+}
+
+.rail-label {
+  color: #708999;
+  font-family: var(--app-font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  padding: 0 11px;
+}
+
+.rail-nav {
+  display: grid;
+  gap: 4px;
+  margin-top: 11px;
+}
+
+.rail-link {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  padding: 10px 11px;
+  background: transparent;
+  color: #a0b3c0;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  text-decoration: none;
+}
+
+.rail-link:hover {
+  color: #f4f7f7;
+  background: hsl(var(--sidebar-accent));
+  transform: translateX(2px);
+}
+
+.rail-link.active {
+  color: hsl(var(--accent));
+  background: #233548;
+  border-color: #33475c;
+}
+
+.rail-link svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 1.8px;
+  flex-shrink: 0;
+}
+
+.rail-link-caret {
+  margin-left: auto;
+  width: 13px;
+  height: 13px;
+  opacity: 0.8;
+}
+
+.rail-bottom {
+  margin-top: auto;
+  border-top: 1px solid hsl(var(--sidebar-border));
+  padding: 15px 11px 4px;
+}
+
+.demo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: hsl(var(--accent));
+  font-family: var(--app-font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.demo-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 99px;
+  background: hsl(var(--accent));
+}
+
+.demo-dot.pulse {
+  box-shadow: 0 0 0 3px rgba(241, 164, 50, 0.25);
+  animation: beaconPulse 2s infinite ease-in-out;
+}
+
+@keyframes beaconPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.7; }
+}
+
+.rail-footnote {
+  color: #738b9c;
+  font-size: 10px;
+  line-height: 1.55;
+  margin: 8px 0 0;
+}
+
+/* --- Main Content Column --- */
+.main-column {
+  margin-left: 248px;
+  width: calc(100% - 248px);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Top Sticky Telemetry Header --- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  height: 70px;
+  padding: 0 42px;
+  background: hsl(var(--card) / 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid hsl(var(--border));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.crumbs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: hsl(var(--muted-foreground));
+}
+
+.crumbs strong {
+  color: hsl(var(--foreground));
+  font-weight: 800;
+}
+
+.crumb-separator {
+  color: #a2b2c3;
+}
+
+.top-status {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: hsl(var(--muted-foreground));
+  font-family: var(--app-font-mono);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.status-pill::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 99px;
+  background: #31aa7e;
+  box-shadow: 0 0 0 4px #31aa7e1f;
+  display: inline-block;
+}
+
+.top-time {
+  color: hsl(var(--muted-foreground));
+  font-family: var(--app-font-mono);
+  font-size: 10px;
+}
+
+/* Quick Tools in Topbar */
+.top-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 14px;
+}
+
+.tool-chip {
+  background: #f1f4f7;
+  border: 1px solid hsl(var(--border));
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 10px;
+  font-family: var(--app-font-mono);
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.tool-chip:hover {
+  background: #e4eaf0;
+  border-color: #8da4b7;
+}
+
+.tool-chip.active {
+  background: hsl(var(--primary));
+  color: #fff;
+  border-color: hsl(var(--primary));
+}
+
+/* --- Page Wrap --- */
+.page-wrap {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 36px 42px 56px;
+  width: 100%;
+}
+
+/* Reveal Animation */
+.reveal {
+  animation: 0.45s both reveal;
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Eyebrow & Hero Header */
+.eyebrow {
+  color: hsl(var(--primary));
+  font-family: var(--app-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.page-title {
+  font-size: clamp(25px, 3vw, 37px);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.12;
+  margin: 8px 0 7px;
+  color: hsl(var(--foreground));
+}
+
+.page-intro {
+  color: hsl(var(--muted-foreground));
+  font-size: 13px;
+  line-height: 1.65;
+  max-width: 660px;
+  margin: 0;
+}
+
+/* ==========================================================================
+   01 Shipment Brief Card
+   ========================================================================== */
+
+.shipment-card {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--card-border));
+  border-radius: 13px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 28px;
+  margin-top: 28px;
+  padding: 21px 23px;
+  box-shadow: 0 8px 28px #192b3e0b;
+}
+
+.section-kicker {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12px;
+  font-weight: 800;
+  color: hsl(var(--foreground));
+}
+
+.section-kicker span {
+  color: hsl(var(--primary));
+  font-family: var(--app-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.shipment-form {
+  display: grid;
+  grid-template-columns: 1.25fr 1.25fr 1fr 1fr 1.15fr;
+  gap: 13px;
+  margin-top: 17px;
+}
+
+.field label {
+  display: block;
+  font-family: var(--app-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+  margin-bottom: 7px;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  min-width: 0;
+  height: 38px;
+  background: #f9fafb;
+  border: 1px solid hsl(var(--input));
+  border-radius: 7px;
+  padding: 0 11px;
+  font-size: 12px;
+  color: hsl(var(--foreground));
+  transition: border 0.2s, box-shadow 0.2s, background 0.2s;
+  outline: none;
+}
+
+.field input:hover,
+.field select:hover {
+  background: hsl(var(--card));
+  border-color: #74bec8;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 3px hsl(var(--ring) / 0.13);
+}
+
+.optimize-button {
+  height: 38px;
+  align-self: end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 19px;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border: 0;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 5px 12px hsl(var(--primary) / 0.2);
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.optimize-button:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 7px 16px hsl(var(--primary) / 0.28);
+  transform: translateY(-1px);
+}
+
+.optimize-button:active {
+  transform: translateY(0);
+}
+
+.optimize-button svg {
+  width: 15px;
+  height: 15px;
+}
+
+.form-note {
+  grid-column: 1 / -1;
+  color: hsl(var(--muted-foreground));
+  font-size: 10.5px;
+  margin: -3px 0 0;
+}
+
+.form-note strong {
+  color: hsl(var(--foreground));
+}
+
+/* Route Strip */
+.route-strip {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 230px;
+  padding: 0 4px;
+}
+
+.route-point {
+  display: grid;
+  gap: 3px;
+}
+
+.route-code {
+  font-family: var(--app-font-mono);
+  font-size: 15px;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+.route-name {
+  color: hsl(var(--muted-foreground));
+  font-size: 10px;
+}
+
+.route-line {
+  flex: 1;
+  min-width: 36px;
+  height: 1px;
+  background: hsl(var(--primary) / 0.35);
+  position: relative;
+}
+
+.route-line::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  right: 0;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid hsl(var(--primary));
+  border-right: 1px solid hsl(var(--primary));
+  transform: rotate(45deg);
+}
+
+/* ==========================================================================
+   02 Market Signals Grid
+   ========================================================================== */
+
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 36px 0 14px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin: 0;
+  color: hsl(var(--foreground));
+}
+
+.section-caption {
+  color: hsl(var(--muted-foreground));
+  font-size: 11px;
+  margin: 4px 0 0;
+}
+
+.micro-label {
+  color: hsl(var(--muted-foreground));
+  font-family: var(--app-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.insight-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 0.94fr 0.94fr;
+  gap: 14px;
+}
+
+.panel {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--card-border));
+  border-radius: 13px;
+  box-shadow: 0 7px 24px #192b3e09;
+}
+
+.panel-pad {
+  padding: 20px;
+}
+
+/* Forecast Panel */
+.forecast-panel {
+  min-height: 265px;
+  position: relative;
+  overflow: hidden;
+}
+
+.forecast-panel::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 45%;
+  background: linear-gradient(#0000, #167b8809);
+  pointer-events: none;
+}
+
+.panel-top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.big-metric {
+  font-family: var(--app-font-mono);
+  font-size: clamp(25px, 3vw, 33px);
+  font-weight: 600;
+  letter-spacing: -0.08em;
+  color: hsl(var(--foreground));
+  margin: 15px 0 4px;
+}
+
+.metric-suffix {
+  font-family: var(--app-font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: hsl(var(--muted-foreground));
+  margin-left: 8px;
+}
+
+.delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--emerald);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.delta svg {
+  width: 13px;
+  height: 13px;
+}
+
+.forecast-chart {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  height: 94px;
+  padding: 7px 4px 0;
+}
+
+.forecast-chart::before,
+.forecast-chart::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px dashed hsl(var(--border));
+}
+
+.forecast-chart::before {
+  top: 29px;
+}
+
+.forecast-chart::after {
+  top: 62px;
+}
+
+.bar-wrap {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.bar {
+  width: 100%;
+  max-width: 19px;
+  background: hsl(var(--primary) / 0.18);
+  border-radius: 3px 3px 1px 1px;
+  transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
+  cursor: pointer;
+}
+
+.bar.current {
+  background: hsl(var(--accent));
+}
+
+.bar:hover {
+  background: hsl(var(--primary));
+}
+
+.bar-month {
+  position: absolute;
+  bottom: -17px;
+  color: hsl(var(--muted-foreground));
+  font-family: var(--app-font-mono);
+  font-size: 9px;
+}
+
+.forecast-foot {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  font-size: 10px;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Secondary Stat Panels */
+.route-share {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.stat-panel {
+  min-height: 125px;
+}
+
+.stat-value {
+  font-family: var(--app-font-mono);
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  margin: 12px 0 4px;
+  color: hsl(var(--foreground));
+}
+
+.stat-detail {
+  color: hsl(var(--muted-foreground));
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.sparkline {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 26px;
+  margin-top: 14px;
+}
+
+.sparkline i {
+  width: 9px;
+  background: hsl(var(--primary) / 0.22);
+  border-radius: 2px 2px 0 0;
+  display: block;
+  transition: height 0.4s ease;
+}
+
+.sparkline i:last-child {
+  background: hsl(var(--accent));
+}
+
+/* ==========================================================================
+   Vessel & Port Comparison Tables
+   ========================================================================== */
+
+.table-panel {
+  overflow: hidden;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.compare-table {
+  width: 100%;
+  min-width: 660px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.compare-table th {
+  background: #f5f7f9;
+  border-bottom: 1px solid hsl(var(--border));
+  color: hsl(var(--muted-foreground));
+  font-family: var(--app-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 13px 20px;
+}
+
+.compare-table td {
+  border-bottom: 1px solid #e9edf2;
+  color: hsl(var(--foreground));
+  font-size: 12px;
+  padding: 15px 20px;
+}
+
+.compare-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.compare-table tbody tr {
+  transition: background 0.15s;
+  cursor: pointer;
+}
+
+.compare-table tbody tr:hover {
+  background: #167b880a;
+}
+
+.compare-table tbody tr.row-selected {
+  background: #f1a4320f;
+}
+
+.vessel-name {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 800;
+}
+
+.vessel-icon {
+  width: 26px;
+  height: 26px;
+  background: #167b8817;
+  color: hsl(var(--primary));
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.vessel-sub {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+  margin-top: 2px;
+}
+
+.best-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--emerald-bg);
+  color: #227758;
+  font-family: var(--app-font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 4px 7px;
+  border-radius: 4px;
+}
+
+.best-badge.warning {
+  background: #f1a4321f;
+  color: #9c6310;
+}
+
+.table-value {
+  font-family: var(--app-font-mono);
+  font-size: 11px;
+}
+
+.table-value.muted {
+  color: hsl(var(--muted-foreground));
+}
+
+/* ==========================================================================
+   03 Strategy Desk & Explainable Recommendation
+   ========================================================================== */
+
+.lower-grid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 14px;
+  align-items: start;
+}
+
+/* Timing List ("When to move") */
+.timing-list {
+  display: grid;
+  gap: 0;
+  margin-top: 15px;
+}
+
+.timing-row {
+  display: grid;
+  grid-template-columns: 74px 1fr auto;
+  align-items: center;
+  gap: 13px;
+  padding: 13px 0;
+  border-bottom: 1px solid #e9edf2;
+}
+
+.timing-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.timing-date {
+  font-family: var(--app-font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+.timing-bar {
+  height: 6px;
+  background: #e2e8ee;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.timing-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: hsl(var(--primary));
+  transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.timing-row:nth-child(2) .timing-fill {
+  background: hsl(var(--accent));
+}
+
+.timing-row:nth-child(3) .timing-fill {
+  background: #266bb5;
+}
+
+.timing-status {
+  font-size: 10px;
+  color: hsl(var(--muted-foreground));
+  white-space: nowrap;
+}
+
+.recompute-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 13px;
+  font-size: 10px;
+  color: hsl(var(--muted-foreground));
+}
+
+.recompute-note svg {
+  color: var(--emerald);
+}
+
+/* Explainable Recommendation Panel */
+.strategy-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.strategy-panel::before {
+  content: "";
+  position: absolute;
+  top: -82px;
+  right: -74px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 1px solid hsl(var(--accent) / 0.25);
+  box-shadow: 0 0 0 25px hsl(var(--accent) / 0.035), 0 0 0 50px hsl(var(--accent) / 0.025);
+  pointer-events: none;
+}
+
+.strategy-content {
+  position: relative;
+  z-index: 2;
+}
+
+.strategy-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--emerald-bg);
+  color: #227758;
+  border-radius: 5px;
+  padding: 5px 8px;
+  font-family: var(--app-font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.strategy-heading {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  margin: 14px 0 9px;
+  color: hsl(var(--foreground));
+}
+
+.strategy-copy {
+  color: hsl(var(--muted-foreground));
+  font-size: 12px;
+  line-height: 1.65;
+  max-width: 520px;
+  margin: 0;
+}
+
+.reason-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 13px;
+  border-top: 1px solid hsl(var(--border));
+}
+
+.reason-icon {
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  background: hsl(var(--accent) / 0.2);
+  color: #885d1b;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.reason-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: hsl(var(--foreground));
+  margin: 0 0 3px;
+}
+
+.reason-copy {
+  color: hsl(var(--muted-foreground));
+  font-size: 10.5px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ==========================================================================
+   05 What-If Simulator Panel
+   ========================================================================== */
+
+.simulator-panel {
+  margin-top: 14px;
+  padding: 22px;
+}
+
+.sim-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.sim-presets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.preset-chip {
+  background: #f1f4f7;
+  border: 1px solid hsl(var(--border));
+  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 10px;
+  font-family: var(--app-font-mono);
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.preset-chip:hover {
+  background: #e4eaf0;
+  color: hsl(var(--foreground));
+  border-color: #74bec8;
+}
+
+.preset-chip.active {
+  background: hsl(var(--primary));
+  color: #fff;
+  border-color: hsl(var(--primary));
+}
+
+.sim-control {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.control-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--app-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+
+.control-output {
+  font-size: 11px;
+  font-weight: 800;
+  color: hsl(var(--foreground));
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Custom Progress Track for Range Sliders */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, hsl(var(--primary)) var(--range-progress, 45%), #d9e0e8 var(--range-progress, 45%));
+  margin-top: 12px;
+  cursor: pointer;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: hsl(var(--primary));
+  border: 3px solid hsl(var(--card));
+  box-shadow: 0 0 0 1px hsl(var(--primary));
+  cursor: grab;
+  transition: transform 0.1s;
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.15);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: hsl(var(--primary));
+  border: 3px solid hsl(var(--card));
+  box-shadow: 0 0 0 1px hsl(var(--primary));
+  cursor: grab;
+}
+
+.sim-result {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 20px;
+  padding: 14px 16px;
+  background: #f5f7f9;
+  border: 1px solid hsl(var(--border));
+  border-radius: 8px;
+}
+
+.sim-score {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 5px solid hsl(var(--accent) / 0.35);
+  display: grid;
+  place-items: center;
+  color: hsl(var(--primary));
+  font-family: var(--app-font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  flex-shrink: 0;
+  background: #fff;
+}
+
+.sim-copy {
+  color: hsl(var(--muted-foreground));
+  font-size: 11px;
+  line-height: 1.55;
+  margin: 3px 0 0;
+}
+
+.sim-copy strong {
+  color: hsl(var(--foreground));
+}
+
+/* ==========================================================================
+   06 Data & Assumptions Section & Footer
+   ========================================================================== */
+
+.footer-note {
+  font-family: var(--app-font-mono);
+  font-size: 10px;
+  color: hsl(var(--muted-foreground));
+  text-align: right;
+  margin-top: 26px;
+}
+
+.footer-note svg {
+  vertical-align: middle;
+}
+
+/* ==========================================================================
+   Maritime Corridor Vector Map Modal / Drawer
+   ========================================================================== */
+
+.map-card {
+  margin-top: 14px;
+  overflow: hidden;
+}
+
+.map-svg-wrap {
+  width: 100%;
+  background: #101a24;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mobile Header */
+.mobile-top {
+  display: none;
+}
+
+/* Compact Analytical View Modifier */
+body.compact-mode .page-wrap {
+  padding: 20px 24px 36px;
+}
+
+body.compact-mode .shipment-card {
+  margin-top: 16px;
+  padding: 14px 18px;
+}
+
+body.compact-mode .panel-pad {
+  padding: 14px;
+}
+
+body.compact-mode .forecast-panel {
+  min-height: 220px;
+}
+
+body.compact-mode .compare-table td {
+  padding: 10px 16px;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+
+@media (max-width: 1120px) {
+  .shipment-card {
+    grid-template-columns: 1fr;
+  }
+  .route-strip {
+    max-width: 360px;
+  }
+  .shipment-form {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .optimize-button {
+    align-self: center;
+  }
+  .insight-grid {
+    grid-template-columns: 1.2fr 1fr;
+  }
+  .forecast-panel {
+    grid-row: span 2;
+  }
+  .route-share {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .side-rail {
+    display: none;
+  }
+  .main-column {
+    margin-left: 0;
+    width: 100%;
+  }
+  .mobile-top {
+    height: 61px;
+    padding: 0 19px;
+    background: hsl(var(--sidebar));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .mobile-brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 13px;
+    font-weight: 800;
+  }
+  .mobile-brand .brand-mark {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+  .topbar {
+    height: 57px;
+    padding: 0 19px;
+    top: 61px;
+  }
+  .top-time {
+    display: none;
+  }
+  .page-wrap {
+    padding: 28px 19px 40px;
+  }
+  .shipment-form {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .shipment-card {
+    padding: 18px;
+  }
+  .insight-grid,
+  .lower-grid {
+    grid-template-columns: 1fr;
+  }
+  .forecast-panel {
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-status {
+    gap: 0;
+  }
+  .status-pill {
+    font-size: 9px;
+  }
+  .crumbs {
+    font-size: 11px;
+  }
+  .shipment-form {
+    grid-template-columns: 1fr;
+  }
+  .route-strip {
+    min-width: 0;
+  }
+  .route-code {
+    font-size: 13px;
+  }
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .sim-control {
+    grid-template-columns: 1fr;
+  }
+  .sim-result {
+    align-items: flex-start;
+  }
+}

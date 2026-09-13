@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>StratCoast — AI Operations Cockpit & Strategy Optimizer</title>
+  <meta name="description" content="StratCoast — AI Charter Strategy Optimizer & Maritime Operations Cockpit for East Coast India ports." />
+  <meta name="theme-color" content="#121b24" />
+
+  <!-- Google Fonts: Manrope & DM Mono matching exact Replit design system -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="cockpit-app">
+    <!-- Left Analytical Navigation Sidebar Rail -->
+    <aside class="side-rail" aria-label="Primary navigation">
+      <div class="brand-lockup">
+        <div class="brand-mark" aria-hidden="true">
+          <!-- Maritime Anchor / Layers Icon -->
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="5" r="3" />
+            <line x1="12" y1="22" x2="12" y2="8" />
+            <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
+          </svg>
+        </div>
+        <div>
+          <div class="brand-name">StratCoast</div>
+          <div class="brand-sub">Charter / Operations Cockpit</div>
+        </div>
+      </div>
+
+      <div class="rail-rule"></div>
+      <div class="rail-label">Workspace</div>
+
+      <nav class="rail-nav">
+        <button class="rail-link active" data-testid="button-nav-shipment" data-target="shipment" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 17l10 5 10-5" />
+            <path d="M2 12l10 5 10-5" />
+            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+          </svg>
+          <span>Shipment brief</span>
+          <svg class="rail-link-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6" /></svg>
+        </button>
+
+        <button class="rail-link" data-testid="button-nav-signals" data-target="signals" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+          </svg>
+          <span>Market signals</span>
+          <svg class="rail-link-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;"><polyline points="9 18 15 12 9 6" /></svg>
+        </button>
+
+        <button class="rail-link" data-testid="button-nav-strategy" data-target="strategy" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </svg>
+          <span>Strategy desk</span>
+          <svg class="rail-link-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;"><polyline points="9 18 15 12 9 6" /></svg>
+        </button>
+
+        <button class="rail-link" data-testid="button-nav-simulator" data-target="simulator" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="21" x2="4" y2="14" /><line x1="4" y1="10" x2="4" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="12" /><line x1="12" y1="8" x2="12" y2="3" />
+            <line x1="20" y1="21" x2="20" y2="16" /><line x1="20" y1="12" x2="20" y2="3" />
+            <line x1="1" y1="14" x2="7" y2="14" /><line x1="9" y1="8" x2="15" y2="8" /><line x1="17" y1="16" x2="23" y2="16" />
+          </svg>
+          <span>What-if simulator</span>
+          <svg class="rail-link-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;"><polyline points="9 18 15 12 9 6" /></svg>
+        </button>
+
+        <button class="rail-link" data-testid="button-nav-corridor" data-target="corridor-map" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+            <path d="M2 12h20" />
+          </svg>
+          <span>Corridor Map</span>
+          <svg class="rail-link-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;"><polyline points="9 18 15 12 9 6" /></svg>
+        </button>
+
+        <button class="rail-link" data-testid="button-nav-data" data-target="data-section" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="16" y1="13" x2="8" y2="13" />
+            <line x1="16" y1="17" x2="8" y2="17" />
+          </svg>
+          <span>Data & assumptions</span>
+          <svg class="rail-link-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;"><polyline points="9 18 15 12 9 6" /></svg>
+        </button>
+      </nav>
+
+      <div class="rail-bottom">
+        <div class="demo-badge">
+          <span class="demo-dot pulse"></span> Reference-grounded synthetic
+        </div>
+        <p class="rail-footnote">
+          East Coast India port identities are reference-based. Rates, congestion, waiting and cost values are simulated.
+        </p>
+      </div>
+    </aside>
+
+    <!-- Main Viewport Column -->
+    <div class="main-column">
+      <!-- Mobile Topbar Header -->
+      <div class="mobile-top">
+        <div class="mobile-brand">
+          <div class="brand-mark">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="12" cy="5" r="3" />
+              <line x1="12" y1="22" x2="12" y2="8" />
+              <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
+            </svg>
+          </div>
+          StratCoast
+        </div>
+        <span class="demo-badge">
+          <span class="demo-dot"></span> Demo
+        </span>
+      </div>
+
+      <!-- Top Sticky Telemetry Bar -->
+      <header class="topbar">
+        <div class="crumbs">
+          <strong>StratCoast</strong>
+          <span class="crumb-separator">/</span>
+          <span>Strategy optimizer</span>
+          <span class="crumb-separator">/</span>
+          <span>East Coast India</span>
+        </div>
+
+        <div class="top-status">
+          <span class="status-pill">Model ready</span>
+          <span class="top-time">Reference model · 2026</span>
+
+          <!-- Interactive Telemetry Controls -->
+          <div class="top-tools">
+            <button class="tool-chip" id="btn-toggle-currency" type="button" title="Toggle Currency valuation between USD ($) and INR (₹)">
+              <span id="currency-label">$ USD</span>
+            </button>
+            <button class="tool-chip" id="btn-toggle-density" type="button" title="Toggle Compact Analytical View">
+              <span>Compact</span>
+            </button>
+            <button class="tool-chip" id="btn-export-dossier" type="button" title="Export Executive Fixture Dossier (JSON)">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Export</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Page Canvas -->
+      <main class="page-wrap">
+        <!-- Hero Section Header -->
+        <div class="reveal">
+          <div class="eyebrow" id="run-eyebrow">Decision workspace · run 01</div>
+          <h1 class="page-title">One clear move for the next fixture.</h1>
+          <p class="page-intro">
+            Set the shipment, scan East Coast port constraints, and see the trade-off in plain language. Start with the recommendation, then pressure-test it below.
+          </p>
+        </div>
+
+        <!-- ==================== 01 SHIPMENT BRIEF ==================== -->
+        <section class="shipment-card reveal" id="shipment" aria-labelledby="shipment-title">
+          <div>
+            <div class="section-kicker" id="shipment-title">
+              <span>01</span> Shipment brief
+            </div>
+
+            <div class="shipment-form">
+              <!-- Origin Field -->
+              <div class="field">
+                <label for="origin">Origin country</label>
+                <select id="origin" data-testid="select-origin"></select>
+              </div>
+
+              <!-- Destination Port Field -->
+              <div class="field">
+                <label for="destination">East Coast port</label>
+                <select id="destination" data-testid="select-destination"></select>
+              </div>
+
+              <!-- Commodity Field -->
+              <div class="field">
+                <label for="commodity">Commodity</label>
+                <select id="commodity" data-testid="select-commodity">
+                  <option value="Iron Ore">Iron Ore</option>
+                  <option value="Coking Coal">Coking Coal</option>
+                  <option value="Steam Coal">Steam Coal</option>
+                  <option value="Limestone">Limestone</option>
+                </select>
+              </div>
+
+              <!-- Quantity Field -->
+              <div class="field">
+                <label for="quantity">Quantity (MT)</label>
+                <input id="quantity" data-testid="input-quantity" inputmode="numeric" type="text" value="70,000" />
+              </div>
+
+              <!-- Optimize Button -->
+              <button class="optimize-button" id="btn-optimize" data-testid="button-optimize" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                </svg>
+                Optimize
+              </button>
+
+              <!-- Form Note / Route Guidance -->
+              <p class="form-note" id="form-route-note">
+                Reference route: <strong>Australia → Paradip</strong> · Odisha · 16.0 m reference draft · editable demo assumptions.
+              </p>
+            </div>
+          </div>
+
+          <!-- Route Strip Indicator -->
+          <div class="route-strip" aria-label="Selected shipment route">
+            <div class="route-point">
+              <span class="route-code" id="text-origin-code" data-testid="text-origin-code">AUS</span>
+              <span class="route-name" id="text-origin-name">Australia</span>
+            </div>
+            <div class="route-line" aria-hidden="true"></div>
+            <div class="route-point">
+              <span class="route-code" id="text-destination-code" data-testid="text-destination-code">INPAR</span>
+              <span class="route-name" id="text-destination-name">Paradip</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== 02 MARKET SIGNALS ==================== -->
+        <section id="signals" aria-labelledby="signals-title">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title" id="signals-title">Market signals</h2>
+              <p class="section-caption" id="signals-caption">
+                Reference-grounded route indicators for 70,000 MT. All numeric market values are simulated.
+              </p>
+            </div>
+            <span class="micro-label">Synthetic snapshot · East Coast India</span>
+          </div>
+
+          <div class="insight-grid">
+            <!-- Freight Forecast Panel -->
+            <article class="panel panel-pad forecast-panel" data-testid="card-freight-forecast">
+              <div class="panel-top">
+                <div>
+                  <div class="micro-label">Freight forecast</div>
+                  <div class="big-metric" data-testid="text-forecast-rate">
+                    <span id="forecast-rate-val">$19.82</span>
+                    <span class="metric-suffix" id="forecast-rate-suffix">/ metric ton</span>
+                  </div>
+                  <div class="delta">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                      <polyline points="17 6 23 6 23 12" />
+                    </svg>
+                    route estimate · not a live quote
+                  </div>
+                </div>
+                <!-- Mini Compass / Forecast Icon -->
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="hsl(187 72% 31%)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+                </svg>
+              </div>
+
+              <!-- 7-Month Predictive Bar Chart -->
+              <div class="forecast-chart" id="forecast-bar-chart" aria-label="Seven month synthetic freight trend">
+                <!-- Injected via JavaScript -->
+              </div>
+
+              <!-- Floor & Ceiling Bounds -->
+              <div class="forecast-foot">
+                <span id="forecast-floor-bound">Floor $16.80</span>
+                <span id="forecast-mid-bound">Route case $19.82</span>
+                <span id="forecast-ceil-bound">Ceiling $25.40</span>
+              </div>
+            </article>
+
+            <!-- Secondary Stat Clusters -->
+            <div class="route-share">
+              <!-- Vessel Availability -->
+              <article class="panel panel-pad stat-panel" data-testid="card-vessel-availability">
+                <div class="micro-label">Vessel availability</div>
+                <div class="stat-value" id="vessel-avail-metric">
+                  66 <span class="metric-suffix">index</span>
+                </div>
+                <div class="stat-detail" id="vessel-avail-detail">
+                  Kamsarmax<br />reference open-tonnage signal
+                </div>
+                <div class="sparkline" id="sparkline-vessel" aria-hidden="true">
+                  <i style="height: 35%;"></i>
+                  <i style="height: 54%;"></i>
+                  <i style="height: 42%;"></i>
+                  <i style="height: 73%;"></i>
+                  <i style="height: 65%;"></i>
+                </div>
+              </article>
+
+              <!-- Port Congestion -->
+              <article class="panel panel-pad stat-panel" data-testid="card-port-congestion">
+                <div class="micro-label">Port congestion</div>
+                <div class="stat-value" id="port-congestion-metric">
+                  34 <span class="metric-suffix">/ 100</span>
+                </div>
+                <div class="stat-detail" id="port-congestion-detail">
+                  Low–Medium<br />simulated at Paradip
+                </div>
+                <div class="sparkline" id="sparkline-congestion" aria-hidden="true">
+                  <i style="height: 66%;"></i>
+                  <i style="height: 67%;"></i>
+                  <i style="height: 55%;"></i>
+                  <i style="height: 44%;"></i>
+                  <i style="height: 38%;"></i>
+                </div>
+              </article>
+
+              <!-- Bunker Index -->
+              <article class="panel panel-pad stat-panel" data-testid="card-bunker-index">
+                <div class="micro-label">Bunker index</div>
+                <div class="stat-value" id="bunker-index-metric">
+                  612 <span class="metric-suffix">USD/t</span>
+                </div>
+                <div class="stat-detail">
+                  synthetic fuel input<br />used in route estimate
+                </div>
+                <div class="sparkline" id="sparkline-bunker" aria-hidden="true">
+                  <i style="height: 29%;"></i>
+                  <i style="height: 38%;"></i>
+                  <i style="height: 50%;"></i>
+                  <i style="height: 67%;"></i>
+                  <i style="height: 78%;"></i>
+                </div>
+              </article>
+
+              <!-- Port Fit -->
+              <article class="panel panel-pad stat-panel" data-testid="card-laycan-fit">
+                <div class="micro-label">Port fit</div>
+                <div class="stat-value" id="port-fit-metric">
+                  88 <span class="metric-suffix">/ 100</span>
+                </div>
+                <div class="stat-detail" id="port-fit-detail">
+                  Feasible<br />cargo + draft check
+                </div>
+                <div class="sparkline" id="sparkline-fit" aria-hidden="true">
+                  <i style="height: 51%;"></i>
+                  <i style="height: 64%;"></i>
+                  <i style="height: 63%;"></i>
+                  <i style="height: 80%;"></i>
+                  <i style="height: 89%;"></i>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== VESSEL & PORT COMPARISON ==================== -->
+        <section aria-labelledby="comparison-title">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title" id="comparison-title">Vessel & port comparison</h2>
+              <p class="section-caption">
+                Compatibility checks capacity, draft, vessel size, cargo handling, cost and simulated risk.
+              </p>
+            </div>
+            <span class="micro-label">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="vertical-align:middle;margin-right:5px;">
+                <line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" />
+              </svg>
+              Ranked fit
+            </span>
+          </div>
+
+          <!-- Vessel Comparison Table -->
+          <div class="panel table-panel">
+            <div class="table-scroll">
+              <table class="compare-table" aria-label="Candidate vessels comparison">
+                <thead>
+                  <tr>
+                    <th>Candidate vessel</th>
+                    <th>Capacity / draft</th>
+                    <th>Indicative rate</th>
+                    <th>ETA load</th>
+                    <th>Route fit</th>
+                    <th>Signal</th>
+                  </tr>
+                </thead>
+                <tbody id="vessel-table-body">
+                  <!-- Injected via JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Port Destination Benchmarking Table -->
+          <div class="panel table-panel" style="margin-top: 14px;">
+            <div class="table-scroll">
+              <table class="compare-table" aria-label="East Coast India destination benchmarking">
+                <thead>
+                  <tr>
+                    <th>East Coast destination</th>
+                    <th>State / type</th>
+                    <th>Draft</th>
+                    <th>Wait</th>
+                    <th>Delivered cost</th>
+                    <th>Suitability</th>
+                  </tr>
+                </thead>
+                <tbody id="port-table-body">
+                  <!-- Injected via JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== INTERACTIVE MARITIME CORRIDOR MAP ==================== -->
+        <section class="panel map-card" id="corridor-map" style="margin-top: 24px;">
+          <div class="panel-pad" style="padding-bottom: 8px;">
+            <div class="panel-top">
+              <div>
+                <div class="micro-label">Hydrographic corridor</div>
+                <h2 class="section-title" style="margin-top: 5px;">East Coast India Maritime Corridor</h2>
+                <p class="section-caption">Interactive Bay of Bengal terminal approaches, draft clearance corridors & route vectors.</p>
+              </div>
+              <span class="demo-badge"><span class="demo-dot"></span> Live Vector Model</span>
+            </div>
+          </div>
+          <div class="map-svg-wrap">
+            <svg id="corridor-svg" viewBox="0 0 920 300" style="width: 100%; max-height: 280px; display: block;">
+              <!-- Background Grid Lines -->
+              <defs>
+                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1d2e40" stroke-width="0.75" />
+                </pattern>
+                <linearGradient id="routeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#167b88" stop-opacity="0.3" />
+                  <stop offset="60%" stop-color="#167b88" stop-opacity="0.9" />
+                  <stop offset="100%" stop-color="#f1a432" stop-opacity="1" />
+                </linearGradient>
+              </defs>
+              <rect width="920" height="300" fill="url(#grid)" />
+
+              <!-- East Coast India Coastline Silhouette -->
+              <path d="M 50,30 Q 180,60 260,95 T 410,135 T 570,180 T 730,225 T 880,265" fill="none" stroke="#2a4159" stroke-width="2.5" stroke-dasharray="4 2" />
+              <text x="70" y="55" fill="#4d6985" font-size="11" font-family="DM Mono">West Bengal</text>
+              <text x="320" y="115" fill="#4d6985" font-size="11" font-family="DM Mono">Odisha Corridor</text>
+              <text x="630" y="195" fill="#4d6985" font-size="11" font-family="DM Mono">Andhra Pradesh</text>
+              <text x="740" y="275" fill="#31aa7e" font-size="10" font-family="DM Mono">BAY OF BENGAL</text>
+
+              <!-- Port Nodes along Corridor -->
+              <!-- Haldia -->
+              <g class="map-node" data-port="Haldia Dock Complex" transform="translate(110, 42)" style="cursor: pointer;">
+                <circle cx="0" cy="0" r="5" fill="#74bec8" />
+                <text x="10" y="4" fill="#a0b3c0" font-size="10" font-family="Manrope" font-weight="600">Haldia (9.5m)</text>
+              </g>
+              <!-- Sagar -->
+              <g class="map-node" data-port="Sagar-Sandheads" transform="translate(170, 62)" style="cursor: pointer;">
+                <circle cx="0" cy="0" r="4.5" fill="#74bec8" />
+                <text x="10" y="4" fill="#a0b3c0" font-size="10" font-family="Manrope">Sagar (12.0m)</text>
+              </g>
+              <!-- Dhamra -->
+              <g class="map-node" data-port="Dhamra" transform="translate(260, 95)" style="cursor: pointer;">
+                <circle cx="0" cy="0" r="6" fill="#167b88" />
+                <text x="10" y="4" fill="#f1f6f7" font-size="11" font-family="Manrope" font-weight="700">Dhamra (17.0m)</text>
+              </g>
+              <!-- Paradip (Hub) -->
+              <g class="map-node" data-port="Paradip" transform="translate(340, 118)" style="cursor: pointer;">
+                <circle cx="0" cy="0" r="14" fill="#f1a432" fill-opacity="0.18" />
+                <circle cx="0" cy="0" r="7.5" fill="#f1a432" />
+                <text x="12" y="4" fill="#f1a432" font-size="12" font-family="Manrope" font-weight="800">Paradip (16.0m)</text>
+              </g>
+              <!-- Gopalpur -->
+              <g class="map-node" data-port="Gopalpur" transform="translate(440, 148)" style="cursor: pointer;">
+                <circle cx="0" cy="0" r="5" fill="#74bec8" />
+                <text x="10" y="4" fill="#a0b3c0" font-size="10" font-family="Manrope">Gopalpur (14.5m)</text>
+              </g>
+              <!-- Visakhapatnam -->
+              <g class="map-node" data-port="Visakhapatnam" transform="translate(540, 175)" style="cursor: pointer;">
+                <circle cx="0" cy="0" r="6.5" fill="#167b88" />
+                <text x="10" y="4" fill="#f1f6f7" font-size="11" font-family="Manrope" font-weight="700">Vizag (16.5m)</text>
+              </g>
+              <!-- Gangavaram -->
+              <g class="map-node" data-port="Gangavaram" transform="translate(610, 195)" style="cursor: pointer;">
+                <circle cx="0" cy="0" r="6" fill="#167b88" />
+                <text x="10" y="4" fill="#f1f6f7" font-size="11" font-family="Manrope">Gangavaram (18.0m)</text>
+              </g>
+              <!-- Kakinada -->
+              <g class="map-node" data-port="Kakinada" transform="translate(680, 218)" style="cursor: pointer;">
+                <circle cx="0" cy="0" r="5" fill="#74bec8" />
+                <text x="10" y="4" fill="#a0b3c0" font-size="10" font-family="Manrope">Kakinada (11.0m)</text>
+              </g>
+              <!-- Krishnapatnam -->
+              <g class="map-node" data-port="Krishnapatnam" transform="translate(800, 252)" style="cursor: pointer;">
+                <circle cx="0" cy="0" r="6" fill="#167b88" />
+                <text x="10" y="4" fill="#f1f6f7" font-size="11" font-family="Manrope">Krishnapatnam (16.0m)</text>
+              </g>
+
+              <!-- Dynamic Sea Inbound Vector from Origin -->
+              <path id="map-approach-vector" d="M 50,280 C 180,260 250,190 340,118" fill="none" stroke="url(#routeGrad)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 3" />
+              <!-- Inbound Ship Glyph -->
+              <g id="map-ship-glyph" transform="translate(200, 220)">
+                <polygon points="0,0 12,-4 18,0 12,4" fill="#f1a432" />
+              </g>
+            </svg>
+          </div>
+        </section>
+
+        <!-- ==================== 03 STRATEGY DESK ==================== -->
+        <section class="lower-grid" id="strategy">
+          <!-- Charter Timing Panel ("When to move") -->
+          <article class="panel panel-pad">
+            <div class="panel-top">
+              <div>
+                <div class="micro-label">Charter timing</div>
+                <h2 class="section-title" style="margin-top: 7px;">When to move</h2>
+              </div>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="hsl(187 72% 31%)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+
+            <!-- Timing Rows -->
+            <div class="timing-list">
+              <!-- Now -->
+              <div class="timing-row">
+                <span class="timing-date">Now</span>
+                <div class="timing-bar">
+                  <div class="timing-fill" id="timing-fill-now" style="width: 43%;"></div>
+                </div>
+                <span class="timing-status" id="timing-status-now">rate floor forming</span>
+              </div>
+
+              <!-- 10-14 days -->
+              <div class="timing-row">
+                <span class="timing-date">10–14 days</span>
+                <div class="timing-bar">
+                  <div class="timing-fill" id="timing-fill-mid" style="width: 82%;"></div>
+                </div>
+                <span class="timing-status" id="timing-status-mid">best balance</span>
+              </div>
+
+              <!-- 21+ days -->
+              <div class="timing-row">
+                <span class="timing-date">21+ days</span>
+                <div class="timing-bar">
+                  <div class="timing-fill" id="timing-fill-long" style="width: 56%;"></div>
+                </div>
+                <span class="timing-status" id="timing-status-long">premium for certainty</span>
+              </div>
+            </div>
+
+            <!-- Recompute Note -->
+            <div class="recompute-note">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+              </svg>
+              Timing updates with your what-if assumptions.
+            </div>
+          </article>
+
+          <!-- Explainable Recommendation Panel -->
+          <article class="panel panel-pad strategy-panel" data-testid="card-best-strategy">
+            <div class="strategy-content">
+              <div class="panel-top">
+                <div>
+                  <div class="micro-label">Explainable recommendation</div>
+                  <h2 class="strategy-heading" id="text-strategy-title" data-testid="text-strategy-title">
+                    Charter Kamsarmax via Paradip
+                  </h2>
+                </div>
+                <!-- Bookmark / Star Icon -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="hsl(36 87% 48%)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+                </svg>
+              </div>
+
+              <!-- Tag Pill -->
+              <span class="strategy-tag" id="strategy-tag-pill">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span id="strategy-tag-text">Balanced cover · 88/100 fit · 32% risk</span>
+              </span>
+
+              <!-- Rationale Copy -->
+              <p class="strategy-copy" id="text-strategy-explanation" data-testid="text-strategy-explanation">
+                Paradip is the strongest fit for this cargo and vessel size. Its bulk handling profile and reference draft keep the expected logistics cost in range.
+              </p>
+
+              <!-- Reason 1: Why this wins -->
+              <div class="reason-row">
+                <span class="reason-icon" aria-hidden="true">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <div>
+                  <p class="reason-title">Why this wins</p>
+                  <p class="reason-copy" id="reason-why-wins">
+                    Paradip supports the Kamsarmax draft and capacity while keeping simulated waiting risk below the alternative ports.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Reason 2: Expected Exposure -->
+              <div class="reason-row">
+                <span class="reason-icon" aria-hidden="true">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="8" x2="12" y2="12" />
+                    <line x1="12" y1="16" x2="12.01" y2="16" />
+                  </svg>
+                </span>
+                <div>
+                  <p class="reason-title">Expected exposure</p>
+                  <p class="reason-copy" id="reason-exposure">
+                    $19.82 / t delivered estimate · Book 10–14 days out · The market is balanced enough to preserve a little optionality.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- ==================== 05 WHAT-IF SIMULATOR ==================== -->
+        <section class="panel simulator-panel" id="simulator" aria-labelledby="sim-title">
+          <div class="sim-header">
+            <div>
+              <div class="section-kicker">
+                <span>05</span> What-if simulator
+              </div>
+              <h2 class="section-title" id="sim-title" style="margin-top: 7px;">
+                Pressure-test the recommendation
+              </h2>
+              <p class="section-caption">
+                Move the simulated assumptions to see when the preferred strategy changes. These are not live measurements.
+              </p>
+
+              <!-- Quick Scenario Stress Presets -->
+              <div class="sim-presets">
+                <span style="font-family: var(--app-font-mono); font-size: 10px; color: hsl(var(--muted-foreground)); text-transform: uppercase;">Presets:</span>
+                <button class="preset-chip active" data-bunker="612" data-congestion="34" type="button">Base Case ($612/t)</button>
+                <button class="preset-chip" data-bunker="740" data-congestion="45" type="button">Bunker Spike ($740/t)</button>
+                <button class="preset-chip" data-bunker="620" data-congestion="78" type="button">Monsoon Congestion (+78%)</button>
+                <button class="preset-chip" data-bunker="560" data-congestion="15" type="button">Clear Berth Window ($560/t)</button>
+                <button class="preset-chip" id="preset-capesize" type="button">Capesize 150k MT Pivot</button>
+              </div>
+            </div>
+
+            <!-- Gauge Icon -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="hsl(187 72% 31%)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+            </svg>
+          </div>
+
+          <div class="sim-control">
+            <!-- Bunker Fuel Range Slider -->
+            <div>
+              <div class="control-label">
+                <label for="fuel-range">Bunker index</label>
+                <span class="control-output" id="text-fuel-value" data-testid="text-fuel-value">612 USD/t</span>
+              </div>
+              <input
+                type="range"
+                id="fuel-range"
+                data-testid="input-fuel-index"
+                aria-label="Bunker index"
+                min="540"
+                max="760"
+                value="612"
+                style="--range-progress: 32.7%;"
+              />
+              <div class="forecast-foot">
+                <span>Lower fuel pressure</span>
+                <span>Higher fuel pressure</span>
+              </div>
+            </div>
+
+            <!-- Port Congestion Range Slider -->
+            <div>
+              <div class="control-label">
+                <label for="congestion-range">Port congestion</label>
+                <span class="control-output" id="text-congestion-value" data-testid="text-congestion-value">34 / 100</span>
+              </div>
+              <input
+                type="range"
+                id="congestion-range"
+                data-testid="input-port-congestion"
+                aria-label="Port congestion"
+                min="0"
+                max="100"
+                value="34"
+                style="--range-progress: 34%;"
+              />
+              <div class="forecast-foot">
+                <span>Clear berth</span>
+                <span>Severe queue</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Simulator Dynamic Result Callout -->
+          <div class="sim-result">
+            <div class="sim-score" id="text-sim-score" data-testid="text-sim-score">88</div>
+            <div>
+              <div class="micro-label" id="sim-scenario-label">Selected scenario: Balanced cover</div>
+              <p class="sim-copy" id="text-sim-copy" data-testid="text-sim-copy">
+                <strong id="sim-copy-headline">Charter Kamsarmax via Paradip.</strong>
+                <span id="sim-copy-body">The market is balanced enough to preserve a little optionality. Use this signal as a conversation starter, not a live quote.</span>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== 06 DATA & ASSUMPTIONS ==================== -->
+        <section class="panel panel-pad" id="data-section" style="margin-top: 14px;" aria-labelledby="data-title">
+          <div class="section-kicker">
+            <span>06</span> Data & assumptions
+          </div>
+          <h2 class="section-title" id="data-title" style="margin-top: 7px;">
+            Reference-grounded prototype data
+          </h2>
+          <p class="section-caption">
+            Port identities and broad operational characteristics are based on publicly available information from Indian port authorities and government/official sources. Freight rates, congestion, waiting time, fuel assumptions and cost values are synthetic demonstration data.
+          </p>
+          <p class="form-note" style="margin-top: 10px;">
+            Prototype uses reference-grounded synthetic data for demonstration. Operational, freight and congestion values are simulated and are not live commercial data. Draft figures are approximate reference assumptions and can vary by berth, tide, season and vessel condition.
+          </p>
+        </section>
+
+        <!-- Footer Audit Stamp -->
+        <p class="footer-note" id="footer-audit-note">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="vertical-align:middle;margin-right:5px;">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="16" x2="12" y2="12" />
+            <line x1="12" y1="8" x2="12.01" y2="8" />
+          </svg>
+          Reference-grounded synthetic demo · no live market, vessel, or port data connected · last optimization used 70,000 MT from Australia to Paradip
+        </p>
+      </main>
+    </div>
+  </div>
+
+  <!-- Standalone Zero-CORS Runtime Script -->
+  <script defer src="js/bundle.js"></script>
+</body>
+</html>
